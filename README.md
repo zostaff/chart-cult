@@ -78,6 +78,10 @@ Replay any finished launch from its first trade and trade it on paper with real 
 
 ![Learn](docs/learn.png)
 
+### Trade on two chains
+
+Connect a Solana wallet and an EVM wallet at the same time and trade both: Solana coins through Jupiter (pump.fun curves and pools), Robinhood Chain coins straight on their pons curve. New, About to graduate and Migrated mix both chains, with a switch per column.
+
 ### A launchpad on two chains
 
 Launch a coin on **pump.fun** (Solana) or on **pons** (Robinhood Chain) from your own wallet. Chartcult adds no fee on top of the launchpad's.
@@ -91,14 +95,17 @@ Connecting a wallet to a trading site is a real risk, so here is exactly what Ch
 **What connecting asks for**
 - **Solana**: the Wallet Standard `connect` call. Your wallet shares your public address. Nothing else.
 - **EVM** (MetaMask, Rabby, Coinbase Wallet and other EIP-6963 wallets): `eth_requestAccounts`, which shares your public address. Reconnecting on a later visit uses `eth_accounts` only, so it never pops up a request by itself.
-- No message signing, no `approve`, no token allowance, no delegation, no session keys.
+- No message signing, no delegation, no session keys. The only token approval Chartcult ever asks for is the exact amount of a Robinhood Chain sell, at the moment you confirm it.
 
 **What we never have**
 - **Your seed phrase or private key.** Chartcult never asks for them. If anything that claims to be Chartcult asks for a seed phrase, it is a scam.
-- **Custody.** We hold no funds and cannot move yours. Paper trading, replays, charts, alerts and the AI need no wallet at all.
+- **Custody.** We hold no funds and cannot move yours. Nothing moves without your wallet's own confirmation. Paper trading, replays, charts, alerts and the AI need no wallet at all.
 
 **When your wallet does sign**
-Only when you launch a coin, and only after your wallet shows you the full transaction:
+Only when you trade for real or launch a coin, and only after your wallet shows you the full transaction. Paper trading is the default; real trading is a separate switch on the ticket.
+- **Solana trades**: swaps are built by Jupiter for the exact amount you confirmed. Before your wallet is asked, the page shows what you pay, about what you get and the minimum after slippage, and checks that the transaction is paid by your own wallet. Your wallet signs it, the page sends it, and you get the Solscan link.
+- **Robinhood Chain trades**: buys and sells go straight to the coin's pons bonding curve, with your address as the recipient and a minimum out. A sell first asks your wallet to approve exactly the amount being sold for that curve, never an unlimited allowance. Every trade is simulated on chain before it is shown to you.
+- **Chartcult takes no fee** on any trade or launch.
 - **pump.fun**: the coin's mint key is generated in your browser and never leaves it. Our server builds the create transaction, your wallet signs it, the page adds the mint's signature, and the server sends it to the network. The transaction creates your coin and, if you chose one, makes your dev buy. Nothing else.
 - **Robinhood Chain**: your wallet sends one transaction to the pons factory (or pons' router for launch plus dev buy), with the launch fee and dev buy amount shown before you approve.
 
