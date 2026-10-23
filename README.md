@@ -1,15 +1,12 @@
 <div align="center">
 
-# chartcult
+[![chartcult: the memecoin terminal, rebuilt from the chain up](docs/banner.png)](https://chartcult.fun)
 
-**A memecoin terminal rebuilt from the chain up.**
-Solana and Robinhood Chain launches, charts, risk checks, AI reads and a launchpad, in one screen. No trading fee, no custody, no account.
-
-**[chartcult.fun](https://chartcult.fun)**
-
-![The launch screen](docs/feed.png)
+**[chartcult.fun](https://chartcult.fun)** · Solana and Robinhood Chain launches, charts, risk checks, AI reads, callouts and a launchpad on one screen. No trading fee, no custody, no account.
 
 </div>
+
+![The launch screen](docs/feed.png)
 
 ---
 
