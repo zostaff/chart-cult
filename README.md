@@ -102,7 +102,7 @@ Connecting a wallet to a trading site is a real risk, so here is exactly what Ch
 - **Custody.** We hold no funds and cannot move yours. Nothing moves without your wallet's own confirmation. Paper trading, replays, charts, alerts and the AI need no wallet at all.
 
 **When your wallet does sign**
-Only when you trade for real or launch a coin, and only after your wallet shows you the full transaction. Paper trading is the default; real trading is a separate switch on the ticket.
+Only when you trade for real or launch a coin, and only after your wallet shows you the full transaction. The ticket opens in live mode, and nothing is signed until you click and your wallet confirms; paper is a switch on the same ticket for practice without a wallet.
 - **Solana trades**: swaps are built by Jupiter for the exact amount you confirmed. Before your wallet is asked, the page shows what you pay, about what you get and the minimum after slippage, and checks that the transaction is paid by your own wallet. Your wallet signs it, the page sends it, and you get the Solscan link.
 - **Robinhood Chain trades**: buys and sells go straight to the coin's pons bonding curve, with your address as the recipient and a minimum out. A sell first asks your wallet to approve exactly the amount being sold for that curve, never an unlimited allowance. Every trade is simulated on chain before it is shown to you.
 - **Chartcult takes no fee** on any trade or launch.
