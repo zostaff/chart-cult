@@ -83,11 +83,32 @@ Connect a Solana wallet and an EVM wallet at the same time and trade both: Solan
 
 Launch a coin on **pump.fun** (Solana) or on **pons** (Robinhood Chain) from your own wallet. Chartcult adds no fee on top of the launchpad's.
 
+## Premium, paid by burning the token
+
+The terminal is free, and everything that keeps you safe stays free: dev, bundle and sniper shares, mint and freeze checks, charts, trading, the launchpad and the lessons. Premium tiers add the edge on top, for 30 days at a time, paid in the Chartcult token. **Every token paid is burned**: it leaves the supply for good and nobody receives it.
+
+| | Free | Cultist $10 | Insider $100 | Whale $500 |
+|---|---|---|---|---|
+| Safety checks, charts, trading, launchpad | ✓ | ✓ | ✓ | ✓ |
+| AI questions a day | 5 | 25 | 100 | no cap |
+| Settings saved to your wallet, every device | | ✓ | ✓ | ✓ |
+| One click buys from the feed | | ✓ | ✓ | ✓ |
+| **Smart money signals**: proven wallets entering the same coin, live | | | ✓ | ✓ |
+| Early callouts from all of X | | | ✓ | ✓ |
+| **Dev dossier**: who funded the dev, launch buyers funded by the same money, past coins | | | | ✓ |
+| Every tool we plug into Chartcult | | | | ✓ |
+
+Prices are set in dollars. When you press Pay, the server prices your tier in tokens at that moment and **holds the quote for 10 minutes**; press Pay again later and it prices again. Your wallet signs one transaction that burns exactly that amount and carries a note naming the quote; the server checks it on chain and turns the tier on. Paying again extends it; upgrading starts the higher tier now and gives the lower one its days back afterwards.
+
+Until the token launches, every tier is open to everyone.
+
 ## Security: why you can connect your wallet
 
 Connecting a wallet to a trading site is a real risk, so here is exactly what Chartcult can and cannot do.
 
 ![Connect menu](docs/wallet.png)
+
+**Signing in** is a free text message your wallet signs, so your settings can follow you. It is not a transaction and moves nothing.
 
 **What connecting asks for**
 - **Solana**: the Wallet Standard `connect` call. Your wallet shares your public address. Nothing else.
@@ -102,6 +123,7 @@ Connecting a wallet to a trading site is a real risk, so here is exactly what Ch
 Only when you trade for real or launch a coin, and only after your wallet shows you the full transaction. The ticket opens in live mode, and nothing is signed until you click and your wallet confirms; paper is a switch on the same ticket for practice without a wallet.
 - **Solana trades**: swaps are built by Jupiter for the exact amount you confirmed. Before your wallet is asked, the page shows what you pay, about what you get and the minimum after slippage, and checks that the transaction is paid by your own wallet. Your wallet signs it, the page sends it, and you get the Solscan link.
 - **Robinhood Chain trades**: buys and sells go straight to the coin's pons bonding curve, with your address as the recipient and a minimum out. A sell first asks your wallet to approve exactly the amount being sold for that curve, never an unlimited allowance. Every trade is simulated on chain before it is shown to you.
+- **Premium**: one transaction that burns the quoted amount of the Chartcult token from your own account, with a memo naming the quote. Nothing is sent to anyone.
 - **Chartcult takes no fee** on any trade or launch.
 - **pump.fun**: the coin's mint key is generated in your browser and never leaves it. Our server builds the create transaction, your wallet signs it, the page adds the mint's signature, and the server sends it to the network. The transaction creates your coin and, if you chose one, makes your dev buy. Nothing else.
 - **Robinhood Chain**: your wallet sends one transaction to the pons factory (or pons' router for launch plus dev buy), with the launch fee and dev buy amount shown before you approve.
