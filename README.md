@@ -59,6 +59,10 @@ Four live columns: **New**, **About to graduate**, **Migrated** and **Robinhood 
 
 The Checks tab can send [CrawlHive](https://crawlhive.xyz)'s crawlers to the coin on screen: linked-wallet bundles traced to the wallet that funded them, the creator's past launches, copycat tickers, a probable dump (how far the price would fall if insiders sold at once) and what the first buyers did since. A 0 to 100 score with every factor behind it, and a link to the full scan with the wallet map. Our own checks stay free; the swarm scan is a Cultist feature.
 
+### A forensic deep check of the dev
+
+The Dev tab can run a [Tracehound](https://tracehound.pro) deep check: it follows the developer's money past the first hop and finds launch farms behind the same funder, a dev who already sold the launch bag, pump rings that bought other coins together and holder farms. A 0 to 100 risk score with the evidence for every point, in under a minute. A Whale feature, like every other tool we plug in.
+
 ### Traders, not just trades
 
 ![Traders ranked by profit](docs/traders.png)
