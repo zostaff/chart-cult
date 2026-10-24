@@ -53,6 +53,12 @@ Four live columns: **New**, **About to graduate**, **Migrated** and **Robinhood 
 - **Every trade on the chart** as a bubble, tagged dev, bundle, sniper, whale, KOL or smart wallet; an all time high line.
 - **Live**: the market cap flashes on every move, new trades flash in as they arrive.
 
+### A second opinion from a crawler swarm
+
+![CrawlHive scan on the Checks tab](docs/crawlhive.png)
+
+The Checks tab can send [CrawlHive](https://crawlhive.xyz)'s crawlers to the coin on screen: linked-wallet bundles traced to the wallet that funded them, the creator's past launches, copycat tickers, a probable dump (how far the price would fall if insiders sold at once) and what the first buyers did since. A 0 to 100 score with every factor behind it, and a link to the full scan with the wallet map. Our own checks stay free; the swarm scan is a Cultist feature.
+
 ### Traders, not just trades
 
 ![Traders ranked by profit](docs/traders.png)
@@ -96,7 +102,8 @@ The terminal is free, and everything that keeps you safe stays free: dev, bundle
 | **Smart money signals**: proven wallets entering the same coin, live | | | ✓ | ✓ |
 | Early callouts from all of X | | | ✓ | ✓ |
 | **Dev dossier**: who funded the dev, launch buyers funded by the same money, past coins | | | | ✓ |
-| Every tool we plug into Chartcult | | | | ✓ |
+| **CrawlHive swarm scan** on the Checks tab | | ✓ | ✓ | ✓ |
+| Every other tool we plug into Chartcult | | | | ✓ |
 
 Prices are set in dollars. When you press Pay, the server prices your tier in tokens at that moment and **holds the quote for 10 minutes**; press Pay again later and it prices again. Your wallet signs one transaction that burns exactly that amount and carries a note naming the quote; the server checks it on chain and turns the tier on. Paying again extends it; upgrading starts the higher tier now and gives the lower one its days back afterwards.
 
