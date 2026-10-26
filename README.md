@@ -52,7 +52,7 @@ Blockchains are the most transparent markets ever built. Chartcult is built on o
 <tr>
 <td align="center" width="25%"><a href="#the-launch-feed"><b>Launch feed</b></a></td>
 <td align="center" width="25%"><a href="#charts-built-from-swaps"><b>Charts from swaps</b></a></td>
-<td align="center" width="25%"><a href="#checks-story-and-dev"><b>Checks, Story, Dev</b></a></td>
+<td align="center" width="25%"><a href="#checks-story-holders-and-dev"><b>Checks, Story, Holders, Dev</b></a></td>
 <td align="center" width="25%"><a href="#radar"><b>Radar</b></a></td>
 </tr>
 <tr>
