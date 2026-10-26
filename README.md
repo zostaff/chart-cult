@@ -2,159 +2,308 @@
 
 [![chartcult: the memecoin terminal, rebuilt from the chain up](docs/banner.png)](https://chartcult.fun)
 
-**[chartcult.fun](https://chartcult.fun)** · Solana and Robinhood Chain launches, charts, risk checks, AI reads, callouts and a launchpad on one screen. No trading fee, no custody, no account.
+### The memecoin terminal that shows you the chain, not its opinion of it.
+
+Launches, charts, risk checks, callers, smart wallets, on-chain PnL and a launchpad on one screen.<br>
+Solana and Robinhood Chain. No trading fee. No custody. No account needed.
+
+[![Live](https://img.shields.io/badge/live-chartcult.fun-c6ff4d?style=for-the-badge&labelColor=17121f)](https://chartcult.fun)
+[![Solana](https://img.shields.io/badge/Solana-mainnet-9945FF?style=for-the-badge&logo=solana&logoColor=white&labelColor=17121f)](https://chartcult.fun)
+[![Robinhood Chain](https://img.shields.io/badge/Robinhood%20Chain-pons-ccff00?style=for-the-badge&labelColor=17121f)](https://chartcult.fun)
+[![Telegram alerts](https://img.shields.io/badge/Telegram-alerts%20bot-26A5E4?style=for-the-badge&logo=telegram&logoColor=white&labelColor=17121f)](https://t.me/chartcult_alerts_bot)
+[![Fee](https://img.shields.io/badge/fee%20on%20top-0%25-ff5fa2?style=for-the-badge&labelColor=17121f)](#security-why-you-can-connect-your-wallet)
+
+**[Open the terminal](https://chartcult.fun)** · [Features](#features) · [How it reads the chain](#how-it-reads-the-chain) · [Architecture](#architecture) · [Security](SECURITY.md)
 
 </div>
 
-![The launch screen](docs/feed.png)
+<br>
 
----
+<p align="center"><img src="docs/feed.jpg" alt="The Chartcult launch screen" width="100%"></p>
 
-## Why we built it
+## Why Chartcult
 
-Traders already juggle GMGN, Axiom, Photon, pump.fun, DexScreener, TradingView and a dozen X tabs. We used them every day and kept hitting the same walls:
+Every memecoin terminal sells speed: a faster feed, a faster buy button, a faster bot. Speed matters, but speed on top of numbers you can't check is just a faster way to be wrong.
 
-- the chart only starts when the aggregator noticed the coin, so the launch minutes are missing;
-- "dev holds 0%" while the dev's other wallets bought the whole curve in the launch block;
-- every buy and sell pays the terminal's cut on top of the venue fee;
-- you cannot practice without risking money;
-- narratives move on X, coins move on the terminal, and the two never meet on one screen;
-- nothing outside Solana and EVM majors, so new chains like Robinhood Chain are invisible.
+Open a coin on a typical terminal and you see a "dev holds" figure, a "bundle" figure, a "smart money" badge, a PnL number on someone's wallet. Which transactions are those from? Which wallets? You can't tell, and the same terminal takes a cut of every trade you make.
 
-Chartcult is our answer: we studied how these platforms present a coin and how traders actually use them, then rebuilt the whole pipeline ourselves, from the raw chain data to the screen, and fixed what bothered us.
+Blockchains are the most transparent markets ever built. Chartcult is built on one rule: **every number on the screen traces back to a transaction you can open yourself.**
 
-## Reverse engineering the chain, not the competition
+<table>
+<tr>
+<th width="28%"></th>
+<th width="36%">Typical terminal</th>
+<th width="36%">Chartcult</th>
+</tr>
+<tr><td><b>Where the chart comes from</b></td><td>An aggregator's feed, starting when it noticed the coin</td><td>The coin's own swaps, decoded from the chain from the first trade</td></tr>
+<tr><td><b>Risk labels</b></td><td>A score or a badge</td><td>A plain sentence with what was measured, and the slot or the sell behind it</td></tr>
+<tr><td><b>Signals</b></td><td>The hits get posted</td><td>Every call stays on screen with what the coin did after, misses included</td></tr>
+<tr><td><b>Wallet PnL</b></td><td>Only trades made through that platform</td><td>Every transaction the wallet signed, whatever bot or app sent it</td></tr>
+<tr><td><b>Paper trading</b></td><td>Filled at the price you clicked</td><td>Filled at the next real trade, with fees and price impact from the pool's reserves</td></tr>
+<tr><td><b>Fee on your trades</b></td><td>A cut on every buy and sell</td><td><b>0%</b> on top of the venue</td></tr>
+<tr><td><b>Account</b></td><td>Sign-up, email, often a custodial wallet</td><td>None needed. Your lists, alerts and journal live in your browser</td></tr>
+</table>
 
-We did not copy anyone's code or design. Every chart, every decoder and every panel is written from scratch. What we reverse engineered is the chain itself: the binary formats the launchpads write, so the terminal reads trades straight from Solana and Robinhood Chain instead of trusting an aggregator.
+<br>
 
-| Source | What we decode | How |
+## Features
+
+<table>
+<tr>
+<td align="center" width="25%"><a href="#the-launch-feed"><b>Launch feed</b></a></td>
+<td align="center" width="25%"><a href="#charts-built-from-swaps"><b>Charts from swaps</b></a></td>
+<td align="center" width="25%"><a href="#checks-story-and-dev"><b>Checks, Story, Dev</b></a></td>
+<td align="center" width="25%"><a href="#radar"><b>Radar</b></a></td>
+</tr>
+<tr>
+<td align="center"><a href="#callers"><b>Callers</b></a></td>
+<td align="center"><a href="#smart-wallets"><b>Smart wallets</b></a></td>
+<td align="center"><a href="#on-chain-pnl"><b>On-chain PnL</b></a></td>
+<td align="center"><a href="#copy-check"><b>Copy check</b></a></td>
+</tr>
+<tr>
+<td align="center"><a href="#replay-and-paper-trading"><b>Replay and paper</b></a></td>
+<td align="center"><a href="#hyperliquid-whales"><b>Hyperliquid whales</b></a></td>
+<td align="center"><a href="#alerts-with-the-tab-closed"><b>Telegram alerts</b></a></td>
+<td align="center"><a href="#and-the-rest"><b>Grid, launchpad, Learn, AI</b></a></td>
+</tr>
+</table>
+
+### The launch feed
+
+<p align="center"><img src="docs/features/01-launch-feed.jpg" alt="Launch feed" width="100%"></p>
+
+A live view of every new launch in three columns: **New**, **About to graduate** and **Migrated**, plus Robinhood Chain. It covers pump.fun, Raydium LaunchLab (bonk.fun and others), Meteora's Dynamic Bonding Curve (bags, believe and others) and pons on Robinhood Chain. One server holds one stream of the chain for everyone and decodes the events itself, so the feed costs the same with one visitor or ten thousand.
+
+Every card carries the facts that decide whether a coin is worth a second look:
+
+- **dev**: the share of supply the creator holds right now, and **dev sold** the moment they dump more than half;
+- **bundle**: supply held by wallets that bought in the same slot as the create;
+- **snipers**: supply held by wallets that bought in the first seconds;
+- **dev ×N**: how many coins this creator launched while we watched, red when none of them reached a pool.
+
+Filter by market cap, bundle share, dev sold, serial devs and quote asset, and get a chime plus a desktop notification for every coin that passes.
+
+### Charts built from swaps
+
+<p align="center"><img src="docs/features/02-charts.jpg" alt="Charts built from swaps" width="100%"></p>
+
+Candles come from the coin's own decoded swaps, not from an API. Our own canvas chart engine, written from scratch with zero dependencies: 1 second to 4 hour candles, market cap or price on the axis, drawing tools, a dozen indicators and memecoin price formatting (`0.0₅411` instead of `0.00000411`).
+
+Every trade is a bubble sized by dollars, and the wallets that matter carry a letter: **D** dev, **B** bundle, **S** sniper, **W** whale, **K** a KOL from your own list, **★** a proven smart wallet.
+
+<p align="center"><img src="docs/coin.jpg" alt="A coin page" width="100%"></p>
+
+### Checks, Story and Dev
+
+<table>
+<tr>
+<td width="50%"><img src="docs/features/03-checks.jpg" alt="Checks"></td>
+<td width="50%"><img src="docs/features/04-story.jpg" alt="Story"></td>
+</tr>
+</table>
+
+- **Checks**: plain-language risk notes, red flags first. Dev sold, bundle and sniper shares, mint and freeze authority, how far a $50 buy moves the price, serial launchers. Each note says what was measured and why it matters.
+- **Story**: the coin's life as a timeline of sentences. What the dev and the bundles bought at launch, the first 2x, the peak, when the dev started selling, when the bundles sold half, the graduation.
+- **Dev**: every coin this creator launched while the server was watching, with its peak and how much of their own buy they dumped. The dev dossier follows the money behind the dev: who funded them, and which launch buyers were funded by the same wallet.
+
+Two more opinions sit one click away: a [CrawlHive](https://crawlhive.xyz) swarm scan on the Checks tab, and a [Tracehound](https://tracehound.pro) forensic deep check of the dev on the Dev tab.
+
+<p align="center"><img src="docs/crawlhive.jpg" alt="CrawlHive swarm scan on the Checks tab" width="70%"></p>
+
+### Radar
+
+<p align="center"><img src="docs/features/06-radar.jpg" alt="Radar" width="100%"></p>
+
+Some of the best moves happen after launch, when a coin that has been quiet for an hour suddenly gets a crowd. Radar watches every trade the server already decodes, so it costs zero extra calls to the chain. It fires when a coin at least ten minutes old gets, in one minute: 15 or more distinct buyers, 6 SOL or more of buying at 1.5x the selling, five times its usual pace, price up 20% in two minutes and a market cap past $15K.
+
+And it keeps the receipts. From one window of 24 hits:
+
+| After firing | Hits |
+|---|---|
+| went 25% or more higher | 14 of 24 |
+| went 50% or more higher | 8 of 24 |
+| doubled | 4 of 24, best 3.6x |
+| **below where it fired, right now** | **17 of 24** |
+
+That last row stays on the screen. Momentum fades as fast as it comes, and a radar that hides its misses is selling you something.
+
+### Callers
+
+<p align="center"><img src="docs/features/07-callers.jpg" alt="Callers" width="100%"></p>
+
+The Callouts panel catches X posts that name a coin by address, by a pump.fun, DexScreener or GMGN link, or by a $TICKER that matches exactly one live coin. Each call shows the market cap at the post, now, and the peak since, and sits on the coin's chart as the caller's avatar on the bar it was posted.
+
+The **Callers** board ranks the accounts behind the last 7 days of calls: how many coins reached 2x and 5x from the post, the median peak, the best call. A coin called twice counts once. Big tickers like $BTC and $SOL are ignored, so nobody farms the board by "calling" Bitcoin. Ranking uses the lower bound of the hit rate: 6 hits out of 8 beats 1 out of 1. Luck doesn't top the board, consistency does.
+
+### Smart wallets
+
+<p align="center"><img src="docs/features/08-smart-money.jpg" alt="Smart wallets" width="100%"></p>
+
+The server records the first 20 buyers of every launch it sees and, once the coin has played out, whether it did 3x from each buyer's entry. Wallets with a long record of early entries into runners rise, bots that buy everything fall out on their own. No paid labels, no manual lists. Follow any wallet and get a notification the moment it trades.
+
+<p align="center"><img src="docs/traders.jpg" alt="Traders ranked by profit" width="100%"></p>
+
+### On-chain PnL
+
+<p align="center"><img src="docs/features/09-onchain-pnl.jpg" alt="On-chain PnL" width="100%"></p>
+
+PnL on most platforms only counts trades made through that platform. Chartcult reads the wallet's own signed transactions straight from the chain, whatever app or bot sent them, so the cost includes everything the wallet really paid: venue fee, bot fee, priority fee, tips. Realized PnL on average cost, open bags at today's price, a calendar by day and a card to share. What can't be priced honestly is marked or left out, and the page says so.
+
+### Copy check
+
+<p align="center"><img src="docs/features/10-copy-check.jpg" alt="Copy check" width="100%"></p>
+
+Every "copy this wallet" pitch shows you the wallet's PnL. Copy check shows you yours: each of its buys becomes your buy, each sell sells the same share, filled after your delay (next block, 1 second, 3 seconds) at the price the market had already moved to, with every fee and price impact. For most wallets the answer is uncomfortable, and that's the point.
+
+### Replay and paper trading
+
+<p align="center"><img src="docs/features/11-replay.jpg" alt="Replay and paper trading" width="100%"></p>
+
+- **Replay any launch** from its first trade at 1x to 60x speed. The chart, the trades and the holder mix only know what had happened by the cursor.
+- **Blind replay** hides the coin's name, so you can't cheat with hindsight.
+- **Honest fills**: every paper order waits for the next real trade and pays the venue fee, your bot fee, priority fee and price impact from the pool's actual reserves.
+- **Journal**: win rate, profit factor, fees as a share of losses, drawdown, best and worst hours.
+
+When you're ready, live trading is on the same ticket: swaps from your own wallet through Jupiter on Solana, and straight on the pons curve on Robinhood Chain.
+
+### Hyperliquid whales
+
+<p align="center"><img src="docs/features/12-hyperliquid.jpg" alt="Hyperliquid whales" width="100%"></p>
+
+Type `HL:BTC`, `HL:SOL` or a HIP-3 market like `HL:xyz:NVDA`. Every Hyperliquid print names buyer and seller, so Chartcult collects the largest traders on the market, reads their actual open positions and draws their exact liquidation prices on the chart. Not a heatmap model: the positions themselves.
+
+### Alerts with the tab closed
+
+<p align="center"><img src="docs/features/13-telegram-alerts.jpg" alt="Telegram alerts" width="100%"></p>
+
+Market cap alerts (2x, 5x, 10x, -50% or any level like `250k`), the dev's first sell and followed-wallet trades. Connect [@chartcult_alerts_bot](https://t.me/chartcult_alerts_bot) once and the server checks your alerts against every trade it decodes. No phone number and no Telegram login ever reach us, only a chat id. `/list` shows your alerts, `/stop` disconnects.
+
+### And the rest
+
+<table>
+<tr>
+<td width="50%"><img src="docs/features/14-grid.jpg" alt="Chart grid"><br><b>Chart grid.</b> Up to 9 live charts on one screen. Drag, resize, hide and add panels, pop any panel out to another monitor.</td>
+<td width="50%"><img src="docs/features/15-launchpad.jpg" alt="Launchpad"><br><b>Launchpad.</b> Launch on pump.fun or on Robinhood Chain from your own wallet. The mint key is made in your browser and never leaves it. No fee on top.</td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/features/16-learn.jpg" alt="Learn"><br><b>Learn.</b> Ten short lessons on bonding curves, who you trade against, what a trade really costs, exits and sizing, each linked to the part of the app that shows it.</td>
+<td width="50%"><img src="docs/features/17-no-account.jpg" alt="No account"><br><b>No account, 0% fee.</b> No sign-up to use any of it. Wallet lists, alerts and journal stay in your browser.</td>
+</tr>
+</table>
+
+**AI helper.** Ask about any coin or wallet and it answers from the same numbers the terminal shows, in your language. It flags partial data and explains risk. It never tells anyone to buy or sell, and never promises a return.
+
+**A desk for narratives.** One click builds a six-panel desk: new coins, coins about to graduate, three X feeds and the launchpad. See the story on X, find the coin, without leaving the screen.
+
+<p align="center"><img src="docs/desk.jpg" alt="Narrative desk" width="100%"></p>
+
+## How it reads the chain
+
+We did not copy anyone's code or design. What we took apart is the chain itself: the binary formats the launchpads write, read from each program's published IDL or source and checked against captured mainnet transactions.
+
+| Venue | What we decode | How |
 |---|---|---|
-| pump.fun bonding curve | create, buy, sell, complete, migrate | Anchor events in transaction logs, checked against the program that emitted them |
-| PumpSwap | pool trades, pool creation | logs and self-CPI events when logs are cut |
-| Raydium LaunchLab, CPMM, AMM v4 | trades, pools | full transactions and `ray_log` lines |
-| Meteora DBC and DAMM v2 | trades, pools | self-CPI event data |
-| Robinhood Chain (pons) | launches, curve buys and sells, graduation | factory and curve events, read with the verified contract sources |
+| **pump.fun** bonding curve | create, buy, sell, complete, migrate | Anchor events in transaction logs, checked against the program that emitted them |
+| **PumpSwap** | pool trades, pool creation | logs, and self-CPI events when logs are cut |
+| **Raydium LaunchLab** | launches, curve trades, migrations | full transactions, instructions by IDL |
+| **Raydium CPMM** and **AMM v4** | pool trades | events and `ray_log` lines |
+| **Meteora DBC** | launches, curve trades, migrations | self-CPI event data, configs read on chain |
+| **Meteora DAMM v2** | pool trades | self-CPI event data |
+| **pons** on Robinhood Chain | launches, curve buys and sells, graduation | factory and curve events from the verified contract sources |
 
-A recent example of why this matters: pump.fun moved graduations to a new `MigrateV2` instruction. Its migration event no longer shows in the logs, and the transaction is so large that Solana cuts the logs short. A terminal that only reads logs stops seeing graduations. We traced it to the instruction level, now detect migrations from the PumpSwap pool the migration creates, and fetch the cut transactions whole.
+Seven Solana programs, both pool orientations, any quote asset. The decoders are covered by **321 tests** that replay real on-chain events, so a change that breaks how a swap is read gets caught before it reaches a chart.
 
-## What we improved
+<details>
+<summary><b>Why this matters: the day graduations disappeared from the logs</b></summary>
+<br>
 
-### The launch screen
+pump.fun moved graduations to a new `MigrateV2` instruction. Its migration event no longer shows in the logs, and the transaction is so large that Solana cuts the logs short. A terminal that only reads logs stops seeing graduations. We traced it to the instruction level: Chartcult now detects migrations from the PumpSwap pool the migration creates, and fetches the cut transactions whole.
 
-Four live columns: **New**, **About to graduate**, **Migrated** and **Robinhood Chain**. Every card carries the dev, bundle and sniper share of supply, how many coins this creator launched today and how many reached a pool, a price sparkline and a one-line AI read of the risk picture ("Dev sold 100% of buy; bundles hold 73.7%; top 10 hold 84.3%"). Columns can be reordered, resized, hidden or popped out to another screen.
+The same care goes into prices. A trade's price is what it paid divided by what it got, so a sell of one lamport for one raw token unit once priced coins thousands of times too high. Trades too small to carry a price are dropped before they reach a candle.
 
-### The coin page
+</details>
 
-![A coin page](docs/coin.png)
+## Architecture
 
-- **The whole life of the coin on the chart.** Candles come from our own decoded trades. Minutes the server missed are filled from GeckoTerminal's minute bars, so there are no holes and no 50K-to-400K single candles.
-- **Bar size follows the coin's age**: 1 second bars for a two-minute-old coin, 1 minute for a few hours old.
-- **Token health card**: top 10 share, dev holding, snipers, bundles, holders, mint and freeze authority, buy and sell pressure over 5 minutes and 24 hours, holder distribution.
-- **Every trade on the chart** as a bubble, tagged dev, bundle, sniper, whale, KOL or smart wallet; an all time high line.
-- **Live**: the market cap flashes on every move, new trades flash in as they arrive.
+```mermaid
+flowchart LR
+  subgraph Chains
+    SOL[(Solana)]
+    RH[(Robinhood Chain)]
+    HL[(Hyperliquid)]
+  end
 
-### A second opinion from a crawler swarm
+  subgraph Server["chartcult server"]
+    STREAM[Live streams<br>one for everyone]
+    DEC[Decoders<br>7 Solana programs + pons]
+    FEED[Launch feed<br>dev, bundle, sniper shares]
+    HIST[Trade history<br>per coin]
+    SIG[Radar, Callers,<br>smart wallets]
+    ALERT[Alert engine]
+  end
 
-![CrawlHive scan on the Checks tab](docs/crawlhive.png)
+  subgraph Browser["your browser"]
+    UI[Canvas charts, checks,<br>replay, paper, journal]
+    LS[(Local storage:<br>lists, layout, journal)]
+    W[Your wallet<br>signs every trade]
+  end
 
-The Checks tab can send [CrawlHive](https://crawlhive.xyz)'s crawlers to the coin on screen: linked-wallet bundles traced to the wallet that funded them, the creator's past launches, copycat tickers, a probable dump (how far the price would fall if insiders sold at once) and what the first buyers did since. A 0 to 100 score with every factor behind it, and a link to the full scan with the wallet map. Our own checks stay free; the swarm scan is a Cultist feature.
+  SOL --> STREAM --> DEC --> FEED & HIST
+  RH --> DEC
+  HIST --> SIG --> ALERT
+  FEED -- SSE --> UI
+  HIST -- SSE --> UI
+  HL --> UI
+  UI <--> LS
+  UI --> W -- signed tx --> SOL
+  W -- signed tx --> RH
+  ALERT --> TG[Telegram bot]
+  X[X posts] --> SIG
+```
 
-### A forensic deep check of the dev
-
-The Dev tab can run a [Tracehound](https://tracehound.pro) deep check: it follows the developer's money past the first hop and finds launch farms behind the same funder, a dev who already sold the launch bag, pump rings that bought other coins together and holder farms. A 0 to 100 risk score with the evidence for every point, in under a minute. A Whale feature, like every other tool we plug in.
-
-### Traders, not just trades
-
-![Traders ranked by profit](docs/traders.png)
-
-The Traders tab ranks every wallet by profit on the coin: what it bought, sold and still holds, PnL and ROI. Smart wallets are the ones that keep showing up among the first buyers of launches that later went 3x, built from every launch the server watched, not bought from a label vendor.
-
-### A desk for narratives
-
-![Narrative desk](docs/desk.png)
-
-One click builds a six-panel desk: new coins, coins about to graduate, three X feeds with different lists (memecoin traders, news and narratives, Solana and launchpads) and the launchpad. See the story on X, find the coin, launch your own, without leaving the screen. Any cell can hold a chart instead.
-
-### AI that reads the data, not the hype
-
-An assistant on every page answers from the terminal's own data: coin reports, dev history, wallet records, the launch feed. It flags partial data, and it never tells anyone to buy or sell or promises a return. The same rules apply to the one-line reads on feed cards.
-
-### Learn without losing money
-
-Replay any finished launch from its first trade and trade it on paper with real fees and price impact, or take a **blind replay** with the name hidden until the end. A journal keeps every paper trade with the coin's state at entry. The Learn page has ten short lessons and videos from explainers with a track record.
-
-![Learn](docs/learn.png)
-
-### Trade on two chains
-
-Connect a Solana wallet and an EVM wallet at the same time and trade both: Solana coins through Jupiter (pump.fun curves and pools), Robinhood Chain coins straight on their pons curve. New, About to graduate and Migrated mix both chains, with a switch per column.
-
-### A launchpad on two chains
-
-Launch a coin on **pump.fun** (Solana) or on **pons** (Robinhood Chain) from your own wallet. Chartcult adds no fee on top of the launchpad's.
+- **One stream, many viewers.** The server decodes the chain once and sends the feed and every coin's live trades to browsers over server-sent events. The cost does not grow with visitors.
+- **Keys stay where they belong.** RPC, X and AI keys live on the server and never reach the page. Your keys never leave your wallet.
+- **Your data stays in your browser.** Lists, layouts, alerts, paper accounts and the journal live in local storage.
+- **TypeScript end to end**: our own canvas chart engine, a decoder per venue, a Node server that watches the chains live, viem for Robinhood Chain.
 
 ## Premium, paid by burning the token
 
-The terminal is free, and everything that keeps you safe stays free: dev, bundle and sniper shares, mint and freeze checks, charts, trading, the launchpad and the lessons. Premium tiers add the edge on top, for 30 days at a time, paid in the Chartcult token. **Every token paid is burned**: it leaves the supply for good and nobody receives it.
+The terminal is free, and **everything that keeps you safe stays free**: dev, bundle and sniper shares, mint and freeze checks, charts, trading, the launchpad and the lessons. Premium tiers add the edge on top for 30 days at a time, paid in the Chartcult token. **Every token paid is burned**: it leaves the supply for good and nobody receives it.
 
 | | Free | Cultist $10 | Insider $100 | Whale $500 |
-|---|---|---|---|---|
+|---|:---:|:---:|:---:|:---:|
 | Safety checks, charts, trading, launchpad | ✓ | ✓ | ✓ | ✓ |
 | AI questions a day | 5 | 25 | 100 | no cap |
 | Settings saved to your wallet, every device | | ✓ | ✓ | ✓ |
 | One click buys from the feed | | ✓ | ✓ | ✓ |
-| **Smart money signals**: proven wallets entering the same coin, live | | | ✓ | ✓ |
+| CrawlHive swarm scan on the Checks tab | | ✓ | ✓ | ✓ |
+| Smart money signals: proven wallets entering the same coin, live | | | ✓ | ✓ |
 | Early callouts from all of X | | | ✓ | ✓ |
-| **Dev dossier**: who funded the dev, launch buyers funded by the same money, past coins | | | | ✓ |
-| **CrawlHive swarm scan** on the Checks tab | | ✓ | ✓ | ✓ |
+| Dev dossier: who funded the dev, buyers funded by the same money | | | | ✓ |
 | Every other tool we plug into Chartcult | | | | ✓ |
 
-Prices are set in dollars. When you press Pay, the server prices your tier in tokens at that moment and **holds the quote for 10 minutes**; press Pay again later and it prices again. Your wallet signs one transaction that burns exactly that amount and carries a note naming the quote; the server checks it on chain and turns the tier on. Paying again extends it; upgrading starts the higher tier now and gives the lower one its days back afterwards.
-
-Until the token launches, every tier is open to everyone.
+Prices are set in dollars. When you press Pay, the server prices your tier in tokens and holds the quote for 10 minutes. Your wallet signs one transaction that burns exactly that amount with a memo naming the quote; the server checks it on chain and turns the tier on. Until the token launches, every tier is open to everyone.
 
 ## Security: why you can connect your wallet
 
-Connecting a wallet to a trading site is a real risk, so here is exactly what Chartcult can and cannot do.
+<p align="center"><img src="docs/wallet.jpg" alt="Connect menu" width="80%"></p>
 
-![Connect menu](docs/wallet.png)
+- **Non-custodial.** Chartcult never asks for a seed phrase or a private key, holds no funds and cannot move yours.
+- **Nothing is signed without you.** Your wallet signs only when you trade for real, launch a coin or pay for a tier, and only after the page shows you what you pay and what you get.
+- **Checked before you sign.** A Solana swap is refused unless your own wallet is its fee payer; a Robinhood Chain sell approves exactly the amount sold, never an unlimited allowance.
+- **No fee.** Chartcult adds nothing on top of the venue on any trade or launch.
 
-**Signing in** is a free text message your wallet signs, so your settings can follow you. It is not a transaction and moves nothing.
+Read the full [security model](SECURITY.md): what connecting asks for, what every signature does, what the server can and cannot see, and how to report a vulnerability.
 
-**What connecting asks for**
-- **Solana**: the Wallet Standard `connect` call. Your wallet shares your public address. Nothing else.
-- **EVM** (MetaMask, Rabby, Coinbase Wallet and other EIP-6963 wallets): `eth_requestAccounts`, which shares your public address. Reconnecting on a later visit uses `eth_accounts` only, so it never pops up a request by itself.
-- No message signing, no delegation, no session keys. The only token approval Chartcult ever asks for is the exact amount of a Robinhood Chain sell, at the moment you confirm it.
+> Memecoins are high risk and most of them go to zero. Red flags in Chartcult are readings of public data, not guarantees, and nothing on the site is financial advice.
 
-**What we never have**
-- **Your seed phrase or private key.** Chartcult never asks for them. If anything that claims to be Chartcult asks for a seed phrase, it is a scam.
-- **Custody.** We hold no funds and cannot move yours. Nothing moves without your wallet's own confirmation. Paper trading, replays, charts, alerts and the AI need no wallet at all.
-
-**When your wallet does sign**
-Only when you trade for real or launch a coin, and only after your wallet shows you the full transaction. The ticket opens in live mode, and nothing is signed until you click and your wallet confirms; paper is a switch on the same ticket for practice without a wallet.
-- **Solana trades**: swaps are built by Jupiter for the exact amount you confirmed. Before your wallet is asked, the page shows what you pay, about what you get and the minimum after slippage, and checks that the transaction is paid by your own wallet. Your wallet signs it, the page sends it, and you get the Solscan link.
-- **Robinhood Chain trades**: buys and sells go straight to the coin's pons bonding curve, with your address as the recipient and a minimum out. A sell first asks your wallet to approve exactly the amount being sold for that curve, never an unlimited allowance. Every trade is simulated on chain before it is shown to you.
-- **Premium**: one transaction that burns the quoted amount of the Chartcult token from your own account, with a memo naming the quote. Nothing is sent to anyone.
-- **Chartcult takes no fee** on any trade or launch.
-- **pump.fun**: the coin's mint key is generated in your browser and never leaves it. Our server builds the create transaction, your wallet signs it, the page adds the mint's signature, and the server sends it to the network. The transaction creates your coin and, if you chose one, makes your dev buy. Nothing else.
-- **Robinhood Chain**: your wallet sends one transaction to the pons factory (or pons' router for launch plus dev buy), with the launch fee and dev buy amount shown before you approve.
-
-**What stays private**
-- The wallets you follow, your KOL list, your layout, your paper journal and alerts live in your browser.
-- Our RPC, X and AI keys stay on the server and are never sent to the page. The RPC proxy only answers our own site.
-- The AI only sees public on-chain data and what you type into it.
-
-**What we cannot promise**
-Memecoins are high risk and most of them go to zero. Red flags in Chartcult are readings of public data, not guarantees, and nothing on the site is financial advice.
-
-## Built with
-
-TypeScript end to end: our own canvas chart engine, decoders for each launchpad, a Node server that watches the chains live and keeps trade history, Claude Haiku for the AI reads, viem for Robinhood Chain.
-
----
+## Links
 
 <div align="center">
 
-**[chartcult.fun](https://chartcult.fun)**
+**[chartcult.fun](https://chartcult.fun)** · **[Telegram alerts bot](https://t.me/chartcult_alerts_bot)** · **[Security](SECURITY.md)**
+
+<sub>Built from scratch. No code, assets or docs from any other platform.</sub>
 
 </div>
