@@ -103,9 +103,9 @@ Every trade is a bubble sized by dollars, and the wallets that matter carry a le
 </tr>
 </table>
 
-- **Checks**: plain-language risk notes, red flags first. Dev sold, bundle and sniper shares, mint and freeze authority, how far a $50 buy moves the price, serial launchers. Each note says what was measured and why it matters.
+- **Checks**: plain-language risk notes, red flags first. Dev sold, **dev moved out** (the dev's real balance, read from the chain, against what the dev bought and sold: tokens sent to other wallets by plain transfer don't hide behind "dev hasn't sold"), bundle and sniper shares, mint and freeze authority, how far a $50 buy moves the price, serial launchers. Each note says what was measured and why it matters.
 - **Story**: the coin's life as a timeline of sentences. What the dev and the bundles bought at launch, the first 2x, the peak, when the dev started selling, when the bundles sold half, the graduation.
-- **Holders**: the top 20 holders as a bubble map, sized by share and colored by label, with lines between wallets the chain shows acting together: bought for in one transaction, first buys in the same quiet slot, or funded by the same wallet. The curve and the pool are named in the caption, not drawn.
+- **Holders**: the top 20 holders as a bubble map, sized by share and colored by label, with lines between wallets the chain shows acting together: bought for in one transaction, first buys in the same quiet slot, or funded by the same wallet. The curve and the pool are named in the caption, not drawn. Top holders who never bought are named too: their tokens came by transfer.
 - **Dev**: every coin this creator launched while the server was watching, with its peak and how much of their own buy they dumped. The dev dossier follows the money behind the dev: who funded them, and which launch buyers were funded by the same wallet.
 
 Two more opinions sit one click away: a [CrawlHive](https://crawlhive.xyz) swarm scan on the Checks tab, and a [Tracehound](https://tracehound.pro) forensic deep check of the dev on the Dev tab.
