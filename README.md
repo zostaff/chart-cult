@@ -77,7 +77,7 @@ A live view of every new launch in three columns: **New**, **About to graduate**
 
 Every card carries the facts that decide whether a coin is worth a second look:
 
-- **dev**: the share of supply the creator holds right now, and **dev sold** the moment they dump more than half;
+- **dev**: the share of supply the creator holds right now, checked against the dev's real balance on chain, **dev sold** the moment they dump more than half, and **dev moved out** when the buy went to other wallets by transfer;
 - **bundle**: supply held by wallets that bought in the same slot as the create;
 - **snipers**: supply held by wallets that bought in the first seconds;
 - **dev ×N**: how many coins this creator launched while we watched, red when none of them reached a pool.
