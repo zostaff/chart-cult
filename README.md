@@ -137,6 +137,12 @@ The Callouts panel catches X posts that name a coin by address, by a pump.fun, D
 
 The **Callers** board ranks the accounts behind the last 7 days of calls: how many coins reached 2x and 5x from the post, the median peak, the best call. A coin called twice counts once. Big tickers like $BTC and $SOL are ignored, so nobody farms the board by "calling" Bitcoin. Ranking uses the lower bound of the hit rate: 6 hits out of 8 beats 1 out of 1. Luck doesn't top the board, consistency does.
 
+### Grok narratives
+
+Grok searches X for what memecoin traders are talking about right now, and you watch it work. Every search shows up the moment Grok runs it: the keywords, the meaning searches, the threads it opens. Then the write-up streams in line by line and settles into narrative cards: the story, the tickers, the posts it read. Tickers that match a live coin in the launch feed become one-click links to its chart.
+
+One scout runs for everyone, so a hundred viewers cost the same as one. It searches every 15 minutes while someone is watching and rarely when nobody is, inside a fixed daily budget. Put it in a feed column or a grid cell: it opens the Narrative desk. What X says, never advice.
+
 ### Smart wallets
 
 <p align="center"><img src="docs/features/08-smart-money.jpg" alt="Smart wallets" width="100%"></p>
