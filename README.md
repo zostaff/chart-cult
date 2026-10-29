@@ -139,7 +139,7 @@ The **Callers** board ranks the accounts behind the last 7 days of calls: how ma
 
 ### Grok narratives
 
-Grok searches X for what memecoin traders are talking about right now, and you watch it work. Every search shows up the moment Grok runs it: the keywords, the meaning searches, the threads it opens. Then the write-up streams in line by line and settles into narrative cards: the story, the tickers, the posts it read. Tickers that match a live coin in the launch feed become one-click links to its chart.
+Grok reads what memecoin traders on X are talking about right now, and you watch it work. It starts from the posts Chartcult already pulls in, from the callers it follows and the early callouts on moving coins, then runs a few X searches of its own to chase what looks new. Every step shows up the moment Grok takes it: the posts it started from, the keywords, the meaning searches, the threads it opens. Then the write-up streams in line by line and settles into narrative cards: the story, the tickers, the posts it read. Tickers that match a live coin in the launch feed become one-click links to its chart.
 
 One scout runs for everyone, so a hundred viewers cost the same as one. It searches every 15 minutes while someone is watching and rarely when nobody is, inside a fixed daily budget. Put it in a feed column or a grid cell: it opens the Narrative desk. What X says, never advice.
 
